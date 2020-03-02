@@ -3,20 +3,22 @@
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    int storageSize;
+    int size = 0;
 
     void clear() {
-        for (int i = 0, storageSize = size(); i < storageSize; i++) {
+        for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
+        size = 0;
     }
 
     void save(Resume r) {
         storage[size()] = r;
+        size++;
     }
 
     Resume get(String uuid) {
-        for (int i = 0, storageSize = size(); i < storageSize; i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 return storage[i];
             }
@@ -25,15 +27,15 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for (int i = 0, storageSize = size(); i < storageSize; i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                for (int j = i; j < storageSize; j++) {
-                    if (j != storageSize - 1) {
+                for (int j = i; j < size; j++) {
+                    if (j != size - 1) {
                         storage[j] = storage[j + 1];
                     }
                     else {
                         storage[j] = null;
-                        storageSize = size();
+                        size--;
                     }
                 }
             }
@@ -45,14 +47,18 @@ public class ArrayStorage {
      */
     Resume[] getAll() {
         Resume[] resumes = new Resume[size()];
-        for (int i = 0, storageSize = size(); i < storageSize; i++) {
+        for (int i = 0; i < size; i++) {
             resumes[i] = storage[i];
         }
         return resumes;
     }
 
     int size() {
-        int size = 0;
+        return size;
+    }
+}
+
+/*int size = 0;
         for (int i = 0; i < storage.length; i++) {
             if (storage[i] != null) {
                 size++;
@@ -61,6 +67,4 @@ public class ArrayStorage {
                 break;
             }
         }
-        return size;
-    }
-}
+        return size;*/
