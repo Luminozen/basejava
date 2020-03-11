@@ -1,3 +1,5 @@
+package com.topjava.basejava.webapp.model;
+
 /**
  * Initial resume class
  */

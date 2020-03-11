@@ -1,3 +1,5 @@
+package com.topjava.basejava.webapp.storage;
+
 /**
  * Array based storage for Resumes
  */
@@ -29,15 +31,11 @@ public class ArrayStorage {
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                for (int j = i; j < size; j++) {
-                    if (j != size - 1) {
-                        storage[j] = storage[j + 1];
-                    }
-                    else {
-                        storage[j] = null;
-                        size--;
-                    }
+                for (int j = i; j < size-1; j++) {
+                    storage[j] = storage[j + 1];
                 }
+                storage[size-1] = null;
+                size--;
             }
         }
     }
