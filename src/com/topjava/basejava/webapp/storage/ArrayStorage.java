@@ -13,15 +13,16 @@ public class ArrayStorage {
     private int uuidPointer = 0;
 
     public void clear() {
-        Arrays.fill(storage, 0, size - 1, null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
     public void update(Resume resume) {
         if (isContain(resume.getUuid())) {
             storage[uuidPointer] = resume;
+            return;
         }
-        System.out.println("Storage dont contain this resume "+resume.getUuid());
+        System.out.println("Storage dont contain this resume " + resume.getUuid());
     }
 
     public void save(Resume resume) {
@@ -29,7 +30,7 @@ public class ArrayStorage {
             if (isContain(resume.getUuid())) {
                 System.out.println("Storage already contain this resume " + resume.getUuid());
             } else {
-                storage[size()] = resume;
+                storage[size] = resume;
                 size++;
             }
         } else {
