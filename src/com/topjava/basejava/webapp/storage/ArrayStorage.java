@@ -1,68 +1,81 @@
 package com.topjava.basejava.webapp.storage;
 
+import com.topjava.basejava.webapp.model.Resume;
+
+import java.util.Arrays;
+
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    int size = 0;
+    private int size = 0;
+    private int uuidPointer = 0;
 
-    void clear() {
-        for (int i = 0; i < size; i++) {
-            storage[i] = null;
-        }
+    public void clear() {
+        Arrays.fill(storage, null);
         size = 0;
     }
 
-    void save(Resume r) {
-        storage[size()] = r;
-        size++;
-    }
-
-    Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                return storage[i];
-            }
+    public void update(Resume r) {
+        if (isContain(r.getUuid())) {
+            storage[uuidPointer] = r;
         }
-        return null;
     }
 
-    void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                for (int j = i; j < size-1; j++) {
-                    storage[j] = storage[j + 1];
-                }
-                storage[size-1] = null;
-                size--;
+    public void save(Resume r) {
+        if (storage[storage.length-1] == null) {
+            if (isContain(r.getUuid())) {
+                System.out.println("Storage already contain this resume" + r.getUuid());
+            } else {
+                storage[size()] = r;
+                size++;
             }
+        } else {
+            System.out.println("Storage is full");
+        }
+    }
+
+    public Resume get(String uuid) {
+        if (isContain(uuid)) {
+            return storage[uuidPointer];
+        } else {
+            System.out.println("Storage dont contain this resume" + uuid);
+            return null;
+        }
+    }
+
+    public void delete(String uuid) {
+        if (isContain(uuid)) {
+            for (int j = uuidPointer; j < size - 1; j++) {
+                storage[j] = storage[j + 1];
+            }
+            storage[size - 1] = null;
+            size--;
+        } else {
+            System.out.println("Storage dont contain this resume" + uuid);
         }
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
-        Resume[] resumes = new Resume[size()];
-        for (int i = 0; i < size; i++) {
-            resumes[i] = storage[i];
-        }
+    public Resume[] getAll() {
+        Resume[] resumes = Arrays.copyOf(storage, size);
         return resumes;
     }
 
-    int size() {
+    public int size() {
         return size;
     }
-}
 
-/*int size = 0;
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] != null) {
-                size++;
-            }
-            else {
-                break;
+    boolean isContain(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                uuidPointer = i;
+                return true;
             }
         }
-        return size;*/
+        return false;
+    }
+}
