@@ -7,11 +7,7 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage implements Storage {
-    private static final int STORAGE_LIMIT = 10_000;
-    private Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int size = 0;
-    private int uuidPointer = 0;
+public class ArrayStorage extends AbstractArrayStorage {
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -19,42 +15,35 @@ public class ArrayStorage implements Storage {
     }
 
     public void update(Resume resume) {
-        if (isContain(resume.getUuid())) {
-            storage[uuidPointer] = resume;
-            return;
+        int index = getIndex(resume.getUuid());
+        if (index == -1) {
+            System.out.println("Resume with uuid " + resume.getUuid() + " not exist");
+        } else {
+            storage[index] = resume;
         }
-        System.out.println("Storage dont contain this resume " + resume.getUuid());
     }
 
     public void save(Resume resume) {
-        if (storage[storage.length - 1] == null) {
-            if (isContain(resume.getUuid())) {
-                System.out.println("Storage already contain this resume " + resume.getUuid());
-            } else {
-                storage[size] = resume;
-                size++;
-            }
-        } else {
+        if (size >= STORAGE_LIMIT) {
             System.out.println("Storage is full");
+        } else if (getIndex(resume.getUuid()) != -1) {
+            System.out.println("Resume with uuid " + resume.getUuid() + " already exist");
+        } else {
+            storage[size] = resume;
+            size++;
         }
     }
 
-    public Resume get(String uuid) {
-        if (isContain(uuid)) {
-            return storage[uuidPointer];
-        }
-        System.out.println("Storage dont contain this resume " + uuid);
-        return null;
-    }
+
 
     public void delete(String uuid) {
-        if (isContain(uuid)) {
-            if (size - 1 - uuidPointer >= 0)
-                System.arraycopy(storage, uuidPointer + 1, storage, uuidPointer, size - 1 - uuidPointer);
+        int index = getIndex(uuid);
+        if (index == -1) {
+            System.out.println("Resume with uuid " + uuid + " not exist");
+        } else {
+            storage[index] = storage[size - 1];
             storage[size - 1] = null;
             size--;
-        } else {
-            System.out.println("Storage dont contain this resume " + uuid);
         }
     }
 
@@ -65,17 +54,11 @@ public class ArrayStorage implements Storage {
         return Arrays.copyOf(storage, size);
     }
 
-    public int size() {
-        return size;
-    }
-
-    private boolean isContain(String uuid) {
+    protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                uuidPointer = i;
-                return true;
-            }
+            if (uuid.equals(storage[i].getUuid()))
+                return i;
         }
-        return false;
+        return -1;
     }
 }
