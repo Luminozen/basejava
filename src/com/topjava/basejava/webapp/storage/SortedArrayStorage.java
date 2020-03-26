@@ -10,6 +10,12 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
+    protected Integer getKey(String uuid) {
+        Resume searchKey = new Resume(uuid);
+        return Arrays.binarySearch(storage, 0, size, searchKey);
+    }
+
+    @Override
     protected void insertResume(Resume resume, int index) {
         int posInsert = -index - 1;
         System.arraycopy(storage, posInsert, storage, posInsert + 1, size - posInsert);
@@ -21,9 +27,4 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         System.arraycopy(storage, index + 1, storage, index, size - index - 1);
     }
 
-    @Override
-    protected int getIndex(String uuid) {
-        Resume searchKey = new Resume(uuid);
-        return Arrays.binarySearch(storage, 0, size, searchKey);
-    }
 }
