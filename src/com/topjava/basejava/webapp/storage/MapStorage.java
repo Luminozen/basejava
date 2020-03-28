@@ -11,21 +11,13 @@ public class MapStorage extends AbstractStorage {
     private String notExistKey;
 
     @Override
-    protected Object getKey(String uuid) {
-        notExistKey = uuid;
-        for (Map.Entry<String, Resume> entry : storageMap.entrySet()) {
-            Object key = entry.getKey();
-            if (key.equals(uuid)) {
-                notExistKey = null;
-                return key;
-            }
-        }
-        return notExistKey;
+    protected String getKey(String uuid) {
+        return uuid;
     }
 
     @Override
     protected boolean isExist(Object key) {
-        return notExistKey == null;
+        return storageMap.containsKey((String) key);
     }
 
     @Override
