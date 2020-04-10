@@ -2,6 +2,10 @@ package com.topjava.basejava.webapp.storage;
 
 import com.topjava.basejava.webapp.model.Resume;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Array based storage for Resumes
  */
@@ -14,6 +18,11 @@ public class ArrayStorage extends AbstractArrayStorage {
                 return i;
         }
         return -1;
+    }
+
+    @Override
+    protected List<Resume> doCopyStorage() {
+        return new ArrayList<>(Arrays.asList(storage));
     }
 
     @Override

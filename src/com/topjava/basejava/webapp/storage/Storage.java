@@ -1,12 +1,8 @@
 package com.topjava.basejava.webapp.storage;
 
 import com.topjava.basejava.webapp.model.Resume;
+import java.util.List;
 
-import java.util.Arrays;
-
-/**
- * Array based storage for Resumes
- */
 public interface Storage {
 
     void clear();
@@ -19,7 +15,7 @@ public interface Storage {
 
     void delete(String uuid);
 
-    Resume[] getAll();
+    List<Resume> getAllSorted();
 
     int size();
 }

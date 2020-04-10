@@ -45,13 +45,13 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void clear() {
-        storageList.clear();
+    protected List<Resume> doCopyStorage() {
+        return new ArrayList<>(storageList);
     }
 
     @Override
-    public Resume[] getAll() {
-        return storageList.toArray(new Resume[storageList.size()]);
+    public void clear() {
+        storageList.clear();
     }
 
     @Override
