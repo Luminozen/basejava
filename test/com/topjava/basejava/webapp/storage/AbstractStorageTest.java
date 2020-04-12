@@ -2,11 +2,12 @@ package com.topjava.basejava.webapp.storage;
 
 import com.topjava.basejava.webapp.exception.ExistStorageException;
 import com.topjava.basejava.webapp.exception.NotExistStorageException;
-import com.topjava.basejava.webapp.exception.StorageException;
 import com.topjava.basejava.webapp.model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -90,12 +91,12 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAll() {
-        Resume[] storageTest = storage.getAll();
-        Assert.assertEquals(3, storageTest.length);
-        Assert.assertEquals(RESUME_1, storageTest[0]);
-        Assert.assertEquals(RESUME_2, storageTest[1]);
-        Assert.assertEquals(RESUME_3, storageTest[2]);
+    public void getAllSorted() {
+        List <Resume> storageTest = storage.getAllSorted();
+        Assert.assertEquals(3, storageTest.size());
+        Assert.assertEquals(RESUME_1, storageTest.get(0));
+        Assert.assertEquals(RESUME_2, storageTest.get(1));
+        Assert.assertEquals(RESUME_3, storageTest.get(2));
     }
 
     @Test

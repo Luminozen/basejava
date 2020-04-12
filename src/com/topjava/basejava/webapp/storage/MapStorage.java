@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MapStorage extends AbstractStorage {
 
-    protected Map<String, Resume> storageMap = new TreeMap<>((uuid1, uuid2) -> uuid1.compareTo(uuid2));
+    protected Map<String, Resume> storageMap = new TreeMap<>(String::compareTo);
     private String notExistKey;
 
     @Override

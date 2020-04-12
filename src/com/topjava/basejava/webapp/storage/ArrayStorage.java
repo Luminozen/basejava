@@ -21,11 +21,6 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected List<Resume> doCopyStorage() {
-        return new ArrayList<>(Arrays.asList(storage));
-    }
-
-    @Override
     protected void insertResume(Resume resume, int index) {
         storage[size] = resume;
     }

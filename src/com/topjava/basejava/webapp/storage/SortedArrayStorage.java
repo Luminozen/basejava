@@ -12,17 +12,10 @@ import java.util.List;
  */
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-    private final static Comparator<Resume> RESUME_COMPARATOR = (resume1, resume2) -> resume1.getUuid().compareTo(resume2.getUuid());
-
     @Override
     protected Integer getKey(String uuid) {
         Resume searchKey = new Resume(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKey);
-    }
-
-    @Override
-    protected List<Resume> doCopyStorage() {
-        return new ArrayList<>(Arrays.asList(storage));
     }
 
     @Override

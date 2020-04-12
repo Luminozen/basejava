@@ -2,6 +2,7 @@ package com.topjava.basejava.webapp;
 
 import com.topjava.basejava.webapp.model.Resume;
 import com.topjava.basejava.webapp.storage.ListStorage;
+import com.topjava.basejava.webapp.storage.MapStorage;
 
 import java.util.*;
 
@@ -25,7 +26,7 @@ public class MainCollection {
         Collection<Resume> collection = new ArrayList<>();
         Map<String, Resume> map = new HashMap<>();
 
-        /*collection.add(RESUME_1);
+        collection.add(RESUME_1);
         collection.add(RESUME_2);
         collection.add(RESUME_3);
         collection.add(RESUME_4);
@@ -40,7 +41,7 @@ public class MainCollection {
             }
         }
 
-        System.out.println(collection.toString());*/
+        System.out.println(collection.toString());
 
         map.put(UUID_1, RESUME_1);
         map.put(UUID_2, RESUME_2);
@@ -54,11 +55,10 @@ public class MainCollection {
         }
     }
 
-    public static void printAll(ListStorage LIST_STORAGE) {
+    public static void printAll(MapStorage LIST_STORAGE) {
         System.out.println("\nGet All");
-        for (Resume r : LIST_STORAGE.getAll()) {
+        for (Resume r : LIST_STORAGE.getAllSorted()) {
             System.out.println(r);
         }
     }
-
 }

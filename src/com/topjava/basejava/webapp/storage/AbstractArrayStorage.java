@@ -61,6 +61,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size--;
     }
 
+    @Override
+    protected List<Resume> doCopyStorage(){
+        return Arrays.asList(Arrays.copyOfRange(storage,0, size));
+    }
+
     protected abstract Integer getKey(String uuid);
 
     protected abstract void insertResume(Resume resume, int index);

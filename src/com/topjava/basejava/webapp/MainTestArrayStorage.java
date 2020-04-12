@@ -7,7 +7,7 @@ import com.topjava.basejava.webapp.storage.SortedArrayStorage;
 /**
  * Test for your com.topjava.basejava.webapp.storage.ArrayStorage implementation
  */
-public class MainTestArrayStorage {
+/*public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
     static final SortedArrayStorage SORTED_ARRAY_STORAGE = new SortedArrayStorage();
 
@@ -34,13 +34,13 @@ public class MainTestArrayStorage {
         SORTED_ARRAY_STORAGE.delete(r1.getUuid());
         printAll();*/
 
-        ARRAY_STORAGE.save(r1);
+        /*ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
         ARRAY_STORAGE.save(r3);
         printAll();
         //ARRAY_STORAGE.save(r1);
 
-        System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
+        System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));*/
 
         //Test update resume
         /*System.out.println("Before update");
@@ -49,7 +49,7 @@ public class MainTestArrayStorage {
         r1.setUuid("uuid10");
         ARRAY_STORAGE.update(r1);
         printAll();
-        ///////////////////////*/
+        ///////////////////////
 
         System.out.println("Size: " + ARRAY_STORAGE.size());
 
@@ -71,4 +71,4 @@ public class MainTestArrayStorage {
             System.out.println(r);
         }
     }
-}
+}*/
