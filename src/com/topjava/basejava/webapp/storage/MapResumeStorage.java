@@ -17,12 +17,12 @@ public class MapResumeStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(Object resumeSK) {
-        return storageMap.containsValue(resumeSK);
+        return resumeSK != null;
     }
 
     @Override
     protected void doUpdate(Resume resume, Object resumeSK) {
-        storageMap.replace(((Resume)resumeSK).getUuid(), resume);
+        storageMap.replace(((Resume) resumeSK).getUuid(), resume);
     }
 
     @Override
@@ -32,12 +32,12 @@ public class MapResumeStorage extends AbstractStorage {
 
     @Override
     protected void doDelete(Object resumeSK) {
-        storageMap.remove(((Resume)resumeSK).getUuid());
+        storageMap.remove(((Resume) resumeSK).getUuid());
     }
 
     @Override
     protected Resume doGet(Object resumeSK) {
-        return storageMap.get(((Resume)resumeSK).getUuid());
+        return (Resume)resumeSK;
     }
 
     @Override

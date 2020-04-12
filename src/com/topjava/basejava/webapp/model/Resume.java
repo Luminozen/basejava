@@ -2,6 +2,8 @@ package com.topjava.basejava.webapp.model;
 
 import java.util.UUID;
 
+import static java.util.UUID.randomUUID;
+
 /**
  * Initial resume class
  */
@@ -11,14 +13,9 @@ public class Resume implements Comparable<Resume> {
     private final String uuid;
     private String fullName;
 
-    public Resume() {
-        this(UUID.randomUUID().toString());
-        fullName = "noname";
-    }
-
-    public Resume(String uuid) {
-        this.uuid = uuid;
-        fullName = "noname";
+    public Resume(String fullName) {
+        this.fullName = fullName;
+        this.uuid = UUID.randomUUID().toString();
     }
 
     public Resume(String uuid, String fullName) {

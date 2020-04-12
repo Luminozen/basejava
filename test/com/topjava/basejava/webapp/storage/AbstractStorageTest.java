@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -15,16 +16,16 @@ public abstract class AbstractStorageTest {
     protected Storage storage;
 
     private final static String UUID_1 = "uuid1";
-    private final static Resume RESUME_1 = new Resume(UUID_1);
+    private final static Resume RESUME_1 = new Resume(UUID_1, "Person1");
 
     private final static String UUID_2 = "uuid2";
-    private final static Resume RESUME_2 = new Resume(UUID_2);
+    private final static Resume RESUME_2 = new Resume(UUID_2, "Person2");
 
     private final static String UUID_3 = "uuid3";
-    private final static Resume RESUME_3 = new Resume(UUID_3);
+    private final static Resume RESUME_3 = new Resume(UUID_3, "Person3");
 
     private final static String UUID_4 = "uuid4";
-    private final static Resume RESUME_4 = new Resume(UUID_4);
+    private final static Resume RESUME_4 = new Resume(UUID_4, "Person4");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -58,7 +59,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume resumeTest = new Resume(UUID_2);
+        Resume resumeTest = new Resume(UUID_2, "new_Person");
         storage.update(resumeTest);
         assertSame(resumeTest, storage.get(UUID_2));
     }
@@ -93,10 +94,11 @@ public abstract class AbstractStorageTest {
     @Test
     public void getAllSorted() {
         List <Resume> storageTest = storage.getAllSorted();
+        List <Resume> storageEqual = List.of(RESUME_1, RESUME_2, RESUME_3);
         Assert.assertEquals(3, storageTest.size());
-        Assert.assertEquals(RESUME_1, storageTest.get(0));
-        Assert.assertEquals(RESUME_2, storageTest.get(1));
-        Assert.assertEquals(RESUME_3, storageTest.get(2));
+        Assert.assertEquals(storageEqual.get(0), storageTest.get(0));
+        Assert.assertEquals(storageEqual.get(1), storageTest.get(1));
+        Assert.assertEquals(storageEqual.get(2), storageTest.get(2));
     }
 
     @Test
