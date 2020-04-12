@@ -1,11 +1,7 @@
 package com.topjava.basejava.webapp.storage;
 
-import com.topjava.basejava.webapp.exception.ExistStorageException;
-import com.topjava.basejava.webapp.exception.NotExistStorageException;
 import com.topjava.basejava.webapp.exception.StorageException;
 import com.topjava.basejava.webapp.model.Resume;
-import com.topjava.basejava.webapp.storage.AbstractStorage;
-import com.topjava.basejava.webapp.storage.Storage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -62,8 +58,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected List<Resume> doCopyStorage(){
-        return Arrays.asList(Arrays.copyOfRange(storage,0, size));
+    protected List<Resume> doCopyStorage() {
+        return Arrays.asList(Arrays.copyOfRange(storage, 0, size));
     }
 
     protected abstract Integer getKey(String uuid);

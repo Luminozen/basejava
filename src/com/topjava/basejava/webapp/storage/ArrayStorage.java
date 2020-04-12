@@ -1,11 +1,6 @@
 package com.topjava.basejava.webapp.storage;
 
 import com.topjava.basejava.webapp.model.Resume;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Array based storage for Resumes
  */
