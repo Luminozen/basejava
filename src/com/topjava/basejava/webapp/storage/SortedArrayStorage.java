@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-    private final static Comparator<Resume> RESUME_COMPARATOR = (resume1, resume2) -> resume1.getUuid().compareTo(resume2.getUuid());
+    private final static Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing(Resume::getUuid);
 
     @Override
     protected Integer getKey(String uuid) {

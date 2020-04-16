@@ -5,7 +5,7 @@ import com.topjava.basejava.webapp.model.Resume;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage extends AbstractStorage {
+public class ListStorage extends AbstractStorage<Integer> {
 
     protected List<Resume> storageList = new ArrayList<>();
 
@@ -20,28 +20,28 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object key) {
+    protected boolean isExist(Integer key) {
         return key != null;
     }
 
     @Override
-    protected void doUpdate(Resume resume, Object key) {
-        storageList.set((Integer) key, resume);
+    protected void doUpdate(Resume resume, Integer key) {
+        storageList.set(key, resume);
     }
 
     @Override
-    protected void doSave(Resume resume, Object key) {
+    protected void doSave(Resume resume, Integer key) {
         storageList.add(resume);
     }
 
     @Override
-    protected void doDelete(Object key) {
-        storageList.remove(((Integer) key).intValue());
+    protected void doDelete(Integer key) {
+        storageList.remove(key.intValue());
     }
 
     @Override
-    protected Resume doGet(Object key) {
-        return storageList.get((Integer) key);
+    protected Resume doGet(Integer key) {
+        return storageList.get(key);
     }
 
     @Override

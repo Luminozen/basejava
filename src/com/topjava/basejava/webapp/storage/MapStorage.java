@@ -4,10 +4,9 @@ import com.topjava.basejava.webapp.model.Resume;
 
 import java.util.*;
 
-public class MapStorage extends AbstractStorage {
+public class MapStorage extends AbstractStorage<String> {
 
     protected Map<String, Resume> storageMap = new TreeMap<>(String::compareTo);
-    private String notExistKey;
 
     @Override
     protected String getKey(String uuid) {
@@ -15,28 +14,28 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object key) {
-        return storageMap.containsKey(key);
+    protected boolean isExist(String uuid) {
+        return storageMap.containsKey(uuid);
     }
 
     @Override
-    protected void doUpdate(Resume resume, Object key) {
-        storageMap.replace((String) key, resume);
+    protected void doUpdate(Resume resume, String uuid) {
+        storageMap.replace(uuid, resume);
     }
 
     @Override
-    protected void doSave(Resume resume, Object key) {
-        storageMap.put((String) key, resume);
+    protected void doSave(Resume resume, String uuid) {
+        storageMap.put(uuid, resume);
     }
 
     @Override
-    protected void doDelete(Object key) {
-        storageMap.remove(key);
+    protected void doDelete(String uuid) {
+        storageMap.remove(uuid);
     }
 
     @Override
-    protected Resume doGet(Object key) {
-        return storageMap.get(key);
+    protected Resume doGet(String uuid) {
+        return storageMap.get(uuid);
     }
 
     @Override

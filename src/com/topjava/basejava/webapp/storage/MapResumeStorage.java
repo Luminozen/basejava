@@ -7,37 +7,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class MapResumeStorage extends AbstractStorage {
+public class MapResumeStorage extends AbstractStorage<Resume> {
     private Map<String, Resume> storageMap = new TreeMap<>(String::compareTo);
 
     @Override
-    protected Object getKey(String uuid) {
+    protected Resume getKey(String uuid) {
         return storageMap.get(uuid);
     }
 
     @Override
-    protected boolean isExist(Object resumeSK) {
+    protected boolean isExist(Resume resumeSK) {
         return resumeSK != null;
     }
 
     @Override
-    protected void doUpdate(Resume resume, Object resumeSK) {
-        storageMap.replace(((Resume) resumeSK).getUuid(), resume);
+    protected void doUpdate(Resume resume, Resume resumeSK) {
+        storageMap.replace(resumeSK.getUuid(), resume);
     }
 
     @Override
-    protected void doSave(Resume resume, Object resumeSK) {
+    protected void doSave(Resume resume, Resume resumeSK) {
         storageMap.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected void doDelete(Object resumeSK) {
-        storageMap.remove(((Resume) resumeSK).getUuid());
+    protected void doDelete(Resume resumeSK) {
+        storageMap.remove(resumeSK.getUuid());
     }
 
     @Override
-    protected Resume doGet(Object resumeSK) {
-        return (Resume)resumeSK;
+    protected Resume doGet(Resume resumeSK) {
+        return resumeSK;
     }
 
     @Override
