@@ -1,4 +1,4 @@
-package com.topjava.basejava.webapp;
+package com.topjava.basejava.webapp.common;
 
 import com.topjava.basejava.webapp.model.Resume;
 

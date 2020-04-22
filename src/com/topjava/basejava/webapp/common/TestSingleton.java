@@ -1,4 +1,4 @@
-package com.topjava.basejava.webapp;
+package com.topjava.basejava.webapp.common;
 
 public class TestSingleton {
     private static TestSingleton ourInstance = new TestSingleton();
