@@ -4,17 +4,20 @@ import java.time.YearMonth;
 import java.util.Objects;
 
 public class Organization {
-    private final String title;
+    private final Link homePage;
+    private final String position;
     private final YearMonth startDate;
     private final YearMonth endDate;
     private final String description;
 
-    public Organization(String title, YearMonth startDate, YearMonth endDate, String description) {
-        Objects.requireNonNull(title,"title must not be null");
+    public Organization(Link homePage, String position, YearMonth startDate, YearMonth endDate, String description) {
+        Objects.requireNonNull(position,"homePage must not be null");
+        Objects.requireNonNull(position,"position must not be null");
         Objects.requireNonNull(startDate, "startDate must not be null");
         Objects.requireNonNull(endDate,"endDate must not be null");
         Objects.requireNonNull(description, "description must not be null");
-        this.title = title;
+        this.homePage = homePage;
+        this.position = position;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
@@ -27,7 +30,8 @@ public class Organization {
 
         Organization that = (Organization) o;
 
-        if (!title.equals(that.title)) return false;
+        if (!homePage.equals(that.homePage)) return false;
+        if (!position.equals(that.position)) return false;
         if (!startDate.equals(that.startDate)) return false;
         if (!endDate.equals(that.endDate)) return false;
         return description.equals(that.description);
@@ -35,7 +39,8 @@ public class Organization {
 
     @Override
     public int hashCode() {
-        int result = title.hashCode();
+        int result = homePage.hashCode();
+        result = 31 * result + position.hashCode();
         result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
         result = 31 * result + description.hashCode();
@@ -44,8 +49,9 @@ public class Organization {
 
     @Override
     public String toString() {
-        return "Organization{" +
-                "title='" + title + '\'' +
+        return "Position{" +
+                "homePage=" + homePage +
+                ", position='" + position + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", description='" + description + '\'' +

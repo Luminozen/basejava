@@ -2,7 +2,7 @@ package com.topjava.basejava.webapp.model;
 
 import java.util.List;
 
-public class ListSection {
+public class ListSection extends Section {
 
     private final List<String> content;
 

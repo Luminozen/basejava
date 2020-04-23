@@ -7,7 +7,7 @@ public enum ContactsType {
     LINKEDIN("Профиль LinkedIn"),
     GITHUB("Профиль GitHub"),
     STUCKOVERFLOW("Профиль Stuckoverflow"),
-    WEBSITE("Домашняя страница");
+    HOMEPAGE("Домашняя страница");
 
     private final String title;
 
@@ -15,5 +15,7 @@ public enum ContactsType {
         this.title = title;
     }
 
-
+    public String getTitle() {
+        return title;
+    }
 }

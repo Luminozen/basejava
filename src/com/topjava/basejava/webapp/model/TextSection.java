@@ -2,7 +2,7 @@ package com.topjava.basejava.webapp.model;
 
 import java.util.Objects;
 
-public class TextSection {
+public class TextSection extends Section{
     private final String content;
 
     public TextSection(String content) {
