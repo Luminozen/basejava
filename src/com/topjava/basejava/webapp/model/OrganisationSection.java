@@ -3,7 +3,7 @@ package com.topjava.basejava.webapp.model;
 import java.util.List;
 import java.util.Objects;
 
-public class OrganisationSection extends Section {
+public class OrganisationSection extends AbstractSection {
     private final List<Organization> organization;
 
     public OrganisationSection(List<Organization> organization) {
@@ -11,7 +11,7 @@ public class OrganisationSection extends Section {
         this.organization = organization;
     }
 
-    public List<Organization> getorganization() {
+    public List<Organization> getOrganization() {
         return organization;
     }
 

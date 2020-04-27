@@ -19,15 +19,15 @@ public class ResumeTestData {
         List<Organization> organisation = new ArrayList<>();//EXPERIENCE
         List<Organization> education = new ArrayList<>();//EDUCATION
 
-        Organization javaOps = new Organization(new Link("JavaOps", "http://javaops.ru/"), "Автор проекта",
+        /*Organization javaOps = new Organization("JavaOps", "http://javaops.ru/", "Автор проекта",
                 YearMonth.of(2013, 10), YearMonth.now(),
                 "Создание, организация и проведение Java онлайн проектов и стажировок.");
-        Organization eduCoursera = new Organization(new Link("Coursera", "coursera.org"), "",
+        Organization eduCoursera = new Organization("Coursera", "coursera.org", "",
                 YearMonth.of(2013, 03), YearMonth.of(2013, 05),
-                "Functional Programming Principles in Scala\" by Martin Odersky");
+                "Functional Programming Principles in Scala\" by Martin Odersky");*/
 
-        organisation.add(javaOps);
-        education.add(eduCoursera);
+        /*organisation.add(javaOps);
+        education.add(eduCoursera);*/
 
         testResume.addContact(ContactsType.PHONE_NUMBER, "+7(921) 855-0482");
         testResume.addContact(ContactsType.SKYPE, "grigory.kislin");
@@ -46,8 +46,10 @@ public class ResumeTestData {
         testResume.addSection(SectionType.EDUCATION, new OrganisationSection(education));
 
         showResume(testResume);
+        //System.out.println(SectionType.EXPERIENCE);
 
     }
+
 
     public static void showResume(Resume resume) {
         System.out.println("Имя: " + resume);

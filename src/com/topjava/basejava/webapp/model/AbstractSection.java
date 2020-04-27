@@ -1,4 +1,4 @@
 package com.topjava.basejava.webapp.model;
 
-public abstract class Section {
+public abstract class AbstractSection {
 }

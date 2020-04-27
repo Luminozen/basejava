@@ -2,8 +2,6 @@ package com.topjava.basejava.webapp.model;
 
 import java.util.*;
 
-import static java.util.UUID.randomUUID;
-
 /**
  * Initial resume class
  */
@@ -14,7 +12,7 @@ public class Resume implements Comparable<Resume> {
     private final String fullName;
 
     private final Map <ContactsType, String> contacts = new EnumMap<>(ContactsType.class);
-    private final Map <SectionType, Section> sections = new EnumMap<>(SectionType.class);
+    private final Map <SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -36,7 +34,7 @@ public class Resume implements Comparable<Resume> {
         contacts.put(type, value);
     }
 
-    public void addSection(SectionType type, Section section){
+    public void addSection(SectionType type, AbstractSection section){
         sections.put(type, section);
     }
 
@@ -44,7 +42,7 @@ public class Resume implements Comparable<Resume> {
         return contacts.get(type);
     }
 
-    public Section getSection(SectionType type) {
+    public AbstractSection getSection(SectionType type) {
         return sections.get(type);
     }
 
