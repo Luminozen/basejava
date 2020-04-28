@@ -40,12 +40,12 @@ public class Organization {
     @Override
     public String toString() {
         return "Organization{" +
-                "homePage=" + homePage +
+                "homePage=" + homePage + "\n" +
                 ", positions=" + positions +
-                '}';
+                '}' + "\n";
     }
 
-    private static class Position {
+    public static class Position {
         private final String position;
         private final YearMonth startDate;
         private final YearMonth endDate;
@@ -91,7 +91,7 @@ public class Organization {
                     ", startDate=" + startDate +
                     ", endDate=" + endDate +
                     ", description='" + description + '\'' +
-                    '}';
+                    '}' + "\n";
         }
     }
 }

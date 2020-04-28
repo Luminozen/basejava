@@ -1,5 +1,6 @@
 package com.topjava.basejava.webapp.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ListSection extends AbstractSection {
@@ -8,6 +9,10 @@ public class ListSection extends AbstractSection {
 
     public ListSection(List<String> content) {
         this.content = content;
+    }
+
+    public ListSection(String ... items) {
+       this(Arrays.asList(items));
     }
 
     public List<String> getContent() {
