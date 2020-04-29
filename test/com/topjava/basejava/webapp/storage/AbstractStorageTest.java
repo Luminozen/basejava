@@ -1,5 +1,6 @@
 package com.topjava.basejava.webapp.storage;
 
+import com.topjava.basejava.webapp.common.ResumeTestData;
 import com.topjava.basejava.webapp.exception.ExistStorageException;
 import com.topjava.basejava.webapp.exception.NotExistStorageException;
 import com.topjava.basejava.webapp.model.Resume;
@@ -26,6 +27,7 @@ public abstract class AbstractStorageTest {
 
     private final static String UUID_4 = "uuid4";
     private final static Resume RESUME_4 = new Resume(UUID_4, "Person4");
+
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;

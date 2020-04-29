@@ -1,5 +1,7 @@
 package com.topjava.basejava.webapp.common;
 
+import com.topjava.basejava.webapp.exception.StorageException;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -10,10 +12,15 @@ public class MainFile {
         printDirectoryList(file);
     }
 
-    private static void printDirectoryList(File rootDir) throws IOException {
+    private static void printDirectoryList(File rootDir) {
+        File[] dirFiles;
         if (rootDir.isDirectory()) {
-            for (File file : rootDir.listFiles()) {
-                System.out.println(file);
+            dirFiles = rootDir.listFiles();
+            if(dirFiles==null) {
+                throw new StorageException("Directory read error", rootDir.getName());
+            }
+            for (File file : dirFiles) {
+                System.out.println(file.getName());
                 printDirectoryList(file);
             }
         }
