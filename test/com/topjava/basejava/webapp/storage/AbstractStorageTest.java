@@ -17,16 +17,16 @@ public abstract class AbstractStorageTest {
     protected Storage storage;
 
     private final static String UUID_1 = "uuid1";
-    private final static Resume RESUME_1 = new Resume(UUID_1, "Person1");
+    private final static Resume RESUME_1 = ResumeTestData.createResume(UUID_1, "Person1");
 
     private final static String UUID_2 = "uuid2";
-    private final static Resume RESUME_2 = new Resume(UUID_2, "Person2");
+    private final static Resume RESUME_2 = ResumeTestData.createResume(UUID_2, "Person2");
 
     private final static String UUID_3 = "uuid3";
-    private final static Resume RESUME_3 = new Resume(UUID_3, "Person3");
+    private final static Resume RESUME_3 = ResumeTestData.createResume(UUID_3, "Person3");
 
     private final static String UUID_4 = "uuid4";
-    private final static Resume RESUME_4 = new Resume(UUID_4, "Person4");
+    private final static Resume RESUME_4 = ResumeTestData.createResume(UUID_4, "Person4");
 
 
     public AbstractStorageTest(Storage storage) {
