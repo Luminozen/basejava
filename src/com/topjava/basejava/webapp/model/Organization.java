@@ -1,12 +1,15 @@
 package com.topjava.basejava.webapp.model;
 
+import java.io.Serializable;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Organization {
+public class Organization implements Serializable {
+    private final static long serialVersionUID = 1L;
+
     private final Link homePage;
     private List<Position> positions;
 
@@ -45,7 +48,9 @@ public class Organization {
                 '}' + "\n";
     }
 
-    public static class Position {
+    public static class Position implements Serializable {
+        private final static long serialVersionUID = 1L;
+
         private final String position;
         private final YearMonth startDate;
         private final YearMonth endDate;
