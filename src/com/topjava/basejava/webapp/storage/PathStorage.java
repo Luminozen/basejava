@@ -33,7 +33,7 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected boolean isExist(Path path) {
-        return path.toFile().exists();
+        return Files.exists(path);
     }
 
     @Override
@@ -80,11 +80,7 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     public void clear() {
-        try {
-            Files.list(directory).forEach(this::doDelete);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        getPathList().forEach(this::doDelete);
     }
 
     @Override
