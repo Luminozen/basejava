@@ -1,16 +1,22 @@
 package com.topjava.basejava.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Link implements Serializable {
     private final static long serialVersionUID = 1L;
 
-    private final String title;
-    private final String url;
+    private String title;
+    private String url;
+
+    public Link() {
+    }
 
     public Link(String title, String url) {
-        Objects.requireNonNull(title,"title must not be null");
+        Objects.requireNonNull(title, "title must not be null");
         Objects.requireNonNull(url, "url must not be null");
         this.title = title;
         this.url = url;

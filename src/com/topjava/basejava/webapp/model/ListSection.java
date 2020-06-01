@@ -1,12 +1,17 @@
 package com.topjava.basejava.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Arrays;
 import java.util.List;
 
 public class ListSection extends AbstractSection {
     private final static long serialVersionUID = 1L;
 
-    private final List<String> content;
+    private List<String> content;
+
+    public ListSection() {
+    }
 
     public ListSection(List<String> content) {
         this.content = content;
