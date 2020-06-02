@@ -39,12 +39,8 @@ public class Resume implements Comparable<Resume>, Serializable {
         return uuid;
     }
 
-    public void addContact(ContactsType type, String value) {
-        contacts.put(type, value);
-    }
-
-    public void addSection(SectionType type, AbstractSection section) {
-        sections.put(type, section);
+    public String getFullName() {
+        return fullName;
     }
 
     public String getContact(ContactsType type) {
@@ -54,6 +50,23 @@ public class Resume implements Comparable<Resume>, Serializable {
     public AbstractSection getSection(SectionType type) {
         return sections.get(type);
     }
+
+    public Map<ContactsType, String> getContacts() {
+        return contacts;
+    }
+
+    public Map<SectionType, AbstractSection> getSections() {
+        return sections;
+    }
+
+    public void addContact(ContactsType type, String value) {
+        contacts.put(type, value);
+    }
+
+    public void addSection(SectionType type, AbstractSection section) {
+        sections.put(type, section);
+    }
+
 
     @Override
     public boolean equals(Object o) {
