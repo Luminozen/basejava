@@ -1,7 +1,5 @@
 package com.topjava.basejava.webapp.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -9,22 +7,22 @@ import java.util.Objects;
 public class OrganisationSection extends AbstractSection {
     private final static long serialVersionUID = 1L;
 
-    private List<Organization> organization;
+    private List<Organization> organizations;
 
     public OrganisationSection() {
     }
 
-    public OrganisationSection(List<Organization> organization) {
-        Objects.requireNonNull(organization, "organization must not be null");
-        this.organization = organization;
+    public OrganisationSection(List<Organization> organizations) {
+        Objects.requireNonNull(organizations, "organization must not be null");
+        this.organizations = organizations;
     }
 
     public OrganisationSection(Organization... organizations) {
         this(Arrays.asList(organizations));
     }
 
-    public List<Organization> getOrganization() {
-        return organization;
+    public List<Organization> getOrganizations() {
+        return organizations;
     }
 
     @Override
@@ -34,16 +32,16 @@ public class OrganisationSection extends AbstractSection {
 
         OrganisationSection that = (OrganisationSection) o;
 
-        return organization.equals(that.organization);
+        return organizations.equals(that.organizations);
     }
 
     @Override
     public int hashCode() {
-        return organization.hashCode();
+        return organizations.hashCode();
     }
 
     @Override
     public String toString() {
-        return organization.toString();
+        return organizations.toString();
     }
 }

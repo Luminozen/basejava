@@ -43,6 +43,10 @@ public class DataStreamSerializer implements StreamSerializer {
                         break;
                     case EXPERIENCE:
                     case EDUCATION:
+                        List<Organization> organizations = ((OrganisationSection) entry.getValue()).getOrganizations();
+                        dos.writeUTF(entry.getKey().name());
+                        dos.writeInt(organizations.size());
+                        writeList(dos, organizations);
                 }
             }
         }
@@ -61,7 +65,7 @@ public class DataStreamSerializer implements StreamSerializer {
             size = dis.readInt();
             for (int i = 0; i < size; i++) {
                 type = SectionType.valueOf(dis.readUTF());
-                resume.addSection(type ,readSection(dis,type));
+                resume.addSection(type, readSection(dis, type));
             }
             return null;
         }
@@ -74,8 +78,34 @@ public class DataStreamSerializer implements StreamSerializer {
                 return new TextSection(dis.readUTF());
             case QUALIFICATIONS:
             case ACHIEVEMENT:
-                return null;
+                return new ListSection(readList(dis, dis.readInt()));
         }
         return null;
+    }
+
+    public List<String> readList(DataInputStream dis, int size) throws IOException {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            list.add(dis.readUTF());
+        }
+        return list;
+    }
+
+    public void writeList(DataOutputStream dos, List<Organization> list) throws IOException {
+        List<Organization.Position> positions;
+        Link homePage;
+        for (Organization item : list) {
+            positions = item.getPositions();
+            homePage = item.getHomePage();
+            dos.writeUTF(homePage.getTitle());
+            dos.writeUTF(homePage.getUrl());
+            dos.writeInt(positions.size());
+            for(Organization.Position position: positions) {
+                dos.writeUTF(position.getPosition());
+                dos.writeUTF(position.getStartDate().toString());
+                dos.writeUTF(position.getEndDate().toString());
+                dos.writeUTF(position.getDescription());
+            }
+        }
     }
 }
