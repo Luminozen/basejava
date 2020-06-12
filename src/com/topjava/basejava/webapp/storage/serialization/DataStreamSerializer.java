@@ -99,7 +99,6 @@ public class DataStreamSerializer implements StreamSerializer {
     public void writeOrganizations(DataOutputStream dos, List<Organization> list) throws IOException {
         List<Organization.Position> positions;
         Link homePage;
-        dos.writeInt(list.size());
         for (Organization item : list) {
             positions = item.getPositions();
             homePage = item.getHomePage();
