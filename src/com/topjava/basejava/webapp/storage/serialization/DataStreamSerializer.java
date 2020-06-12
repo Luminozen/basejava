@@ -1,9 +1,9 @@
 package com.topjava.basejava.webapp.storage.serialization;
 
 import com.topjava.basejava.webapp.model.*;
-import org.w3c.dom.Text;
 
 import java.io.*;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +46,8 @@ public class DataStreamSerializer implements StreamSerializer {
                         List<Organization> organizations = ((OrganisationSection) entry.getValue()).getOrganizations();
                         dos.writeUTF(entry.getKey().name());
                         dos.writeInt(organizations.size());
-                        writeList(dos, organizations);
+                        writeOrganizations(dos, organizations);
+                        break;
                 }
             }
         }
@@ -67,7 +68,8 @@ public class DataStreamSerializer implements StreamSerializer {
                 type = SectionType.valueOf(dis.readUTF());
                 resume.addSection(type, readSection(dis, type));
             }
-            return null;
+
+            return resume;
         }
     }
 
@@ -79,6 +81,9 @@ public class DataStreamSerializer implements StreamSerializer {
             case QUALIFICATIONS:
             case ACHIEVEMENT:
                 return new ListSection(readList(dis, dis.readInt()));
+            case EXPERIENCE:
+            case EDUCATION:
+                return new OrganisationSection(readOrganizations(dis, dis.readInt()));
         }
         return null;
     }
@@ -91,9 +96,10 @@ public class DataStreamSerializer implements StreamSerializer {
         return list;
     }
 
-    public void writeList(DataOutputStream dos, List<Organization> list) throws IOException {
+    public void writeOrganizations(DataOutputStream dos, List<Organization> list) throws IOException {
         List<Organization.Position> positions;
         Link homePage;
+        dos.writeInt(list.size());
         for (Organization item : list) {
             positions = item.getPositions();
             homePage = item.getHomePage();
@@ -107,5 +113,22 @@ public class DataStreamSerializer implements StreamSerializer {
                 dos.writeUTF(position.getDescription());
             }
         }
+    }
+
+    public List<Organization> readOrganizations(DataInputStream dis, int size) throws IOException {
+        List<Organization> organizations = new ArrayList<>();
+        for(int i = 0; i < size; i++) {
+            Link homePage = new Link(dis.readUTF(), dis.readUTF());
+            organizations.add(new Organization(homePage, readPositions(dis, dis.readInt())));
+        }
+        return organizations;
+    }
+
+    public List<Organization.Position> readPositions(DataInputStream dis, int size) throws IOException {
+        List<Organization.Position> positions = new ArrayList<>();
+        for(int i = 0; i < size; i++) {
+            positions.add(new Organization.Position(dis.readUTF(), YearMonth.parse(dis.readUTF()), YearMonth.parse(dis.readUTF()), dis.readUTF()));
+        }
+        return  positions;
     }
 }
