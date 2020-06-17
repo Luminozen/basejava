@@ -1,13 +1,20 @@
 package com.topjava.basejava.webapp.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MainConcurrency {
     private static final Object lock1 = new Object();
     private static final Object lock2 = new Object();
+    private static final Lock lock = new ReentrantLock();
     private int counter = 0;
 
     public static void main(String[] args) throws InterruptedException {
@@ -15,14 +22,14 @@ public class MainConcurrency {
         final MainConcurrency mainConcurrency = new MainConcurrency();
         CountDownLatch latch = new CountDownLatch(10000);
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-        for(int i =0; i < 10000; i++) {
-        executorService.submit(() ->
-                {
-                    for (int j = 0; j < 100; j++) {
-                        mainConcurrency.inc();
-                    }
-                    latch.countDown();
-                });
+        for (int i = 0; i < 10000; i++) {
+            executorService.submit(() ->
+            {
+                for (int j = 0; j < 100; j++) {
+                    mainConcurrency.inc();
+                }
+                latch.countDown();
+            });
         }
         latch.await(20, TimeUnit.SECONDS);
         executorService.shutdown();
@@ -58,7 +65,12 @@ public class MainConcurrency {
         }
     }
 
-    public synchronized void inc() {
+    public void inc() {
+        lock.lock();
         counter++;
+        lock.unlock();
     }
+
+
+
 }
